@@ -72,12 +72,14 @@ export function Sidebar({
   );
 
   useEffect(() => {
+    // console.log("sidebar is: ",sidebarOpen?'open':'closed')
     const handleClickOutside = (event: MouseEvent) => {
       if (
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target as Node)
       ) {
         closeSidebar();
+        // setSidebarOpen(!sidebarOpen)
       }
     };
 

@@ -56,7 +56,7 @@ export default function BreadCrumbComponent({
   }, [rest, fullCourseContent, courseContent, contentType]);
 
   return (
-    <>
+    <div>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -92,11 +92,15 @@ export default function BreadCrumbComponent({
             } else {
               finalRouteArray = [...rest];
             }
+
             return (
-              <>
+              <div key={breadcrumb.id}>
                 {index !== array.length - 1 ? (
-                  <>
-                    <BreadcrumbItem>
+                  <div
+                    key={`${breadcrumb.id}-link`}
+                    className="flex items-center gap-2"
+                  >
+                    <BreadcrumbItem key={`${breadcrumb.id}-item`}>
                       <BreadcrumbLink asChild>
                         <Link
                           href={`/courses/${course.id}/${finalRouteArray.join('/')}`}
@@ -106,21 +110,22 @@ export default function BreadCrumbComponent({
                         </Link>
                       </BreadcrumbLink>
                     </BreadcrumbItem>
-                    {/* <BreadcrumbSeparator /> */}
-                    {index + 1 < array.length && <BreadcrumbSeparator />}
-                  </>
+                    {index + 1 < array.length && (
+                      <BreadcrumbSeparator key={`${breadcrumb.id}-separator`} />
+                    )}
+                  </div>
                 ) : (
-                  <BreadcrumbItem>
+                  <BreadcrumbItem key={`${breadcrumb.id}-page`}>
                     <BreadcrumbPage className="text-sm font-semibold capitalize text-primary">
                       {breadcrumb.title}
                     </BreadcrumbPage>
                   </BreadcrumbItem>
                 )}
-              </>
+              </div>
             );
           })}
         </BreadcrumbList>
       </Breadcrumb>
-    </>
+    </div>
   );
 }
